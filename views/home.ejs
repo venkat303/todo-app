@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <script src="https://kit.fontawesome.com/fe72e1556a.js" crossorigin="anonymous"></script>   
+        <link rel="stylesheet" href="css/home.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="title">
+                <h2>TODO App</h2>
+            </div>
+            <form action="/create-task" method="post">
+                <div id="task-input">
+                    <label for="input">DESCRIPTION</label>
+                    <input type="text" id="input" name="title" placeholder="What do you need to do?" required>
+                </div>
+                <div id="category-date">
+                    <div id="category">
+                        <label for="select-category">CATEGORY</label>
+                        <select name="category" id="select-category" >
+                            <option value="" selected>Choose a category</option>
+                            <option value="Work">Work</option>
+                            <option value="School">School</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Home">Home</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div id="due-date">
+                        <label for="date">DUE DATE</label>
+                        <input type="date" id="date" name="duedate">
+                    </div>
+                </div>
+                <div id="add-delete">
+                    <button id="add" type="submit" style="background-color: rgb(46, 45, 45); color: white;">
+                        <i class="fa-sharp fa-solid fa-plus" style="margin: 4%;"></i>ADD TASK
+                    </button>
+                    <button id="delete" type="submit" style="background-color: red; color: white;">
+                        <i class="fa-solid fa-trash-can" style="margin: 4%;"></i>DELETE TASKS
+                    </button>
+                </div>
+            </form>
+
+            <!-- This will display the tasks on web browser -->
+            <div id="task-display">
+                <ul>
+                    <% for(let i of task_list) { %>
+                        <li>
+                            <div>
+                                <input type="checkbox" class="checkbox" onclick="toggleTask()" task-id = <%= i._id %>>
+                                <label id = <%= i._id %> task-id = <%= i._id %> for="checkbox" style="font-weight:600;"><%= i.title %></label>
+                                <p class="task-date">
+                                    <i class="fa-regular fa-calendar-days" style="margin-right: 2%;"></i>
+                                    <%= i.duedate %>
+                                </p>
+                            </div>
+                            <span class="catsec" style="text-transform:capitalize ;"><%= i.category %></span>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" 
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/home.js"></script>
+    </body>
+</html>
